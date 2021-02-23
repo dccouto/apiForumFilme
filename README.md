@@ -4,11 +4,11 @@ O [Movie Challenge] disponibiliza uma API REST para que seus usuários possam tr
 
 
 Recursos disponíveis para acesso via API:
-* [**Filme**](#reference/filme)
-* [**Avaliação**](#reference/avaliação)
-* [**Grupo**](#reference/grupo)
-* [**Lista De Filme**](#reference/lista)
-* [**Usuários**](#reference/usuarios)
+* [**Filme**](#filme)
+* [**Avaliação**](#avaliacao)
+* [**Grupo**](#grupo)
+* [**Lista De Filme**](#lista)
+* [**Usuários**](#usuario)
 
 ## Informações importantes
 ### Banco de dados
@@ -59,7 +59,7 @@ Para utilizar a API através, você precisará utilizar uma das seguintes opçõ
 
 # Group Recursos
 
-
+<a id="filme"></a>
 # Filme [/api/filme]
 
 Os filmes que podem ser consultados e adicionado nas listas.
@@ -90,7 +90,7 @@ Os filmes que podem ser consultados e adicionado nas listas.
 
 + Response 204 (application/json)
 
-
+<a id="usuario"></a>
 # Usuario [/api/usuario]
 
 Cadastra um novo usuário no sistema
@@ -120,7 +120,7 @@ Cadastra um novo usuário no sistema
 
 + Response 200 (application/json)
 
-
+<a id="avaliacao"></a>
 # Avaliação [/api/filme/avaliar]
 
 Cria, consulta e exclui uma avaliação um filme com `nota` e `estrela`
@@ -220,7 +220,7 @@ Cria, consulta e exclui uma avaliação um filme com `nota` e `estrela`
 	Excluído com sucesso
 
 
-
+<a id="grupo"></a>
 # Grupo [/api/grupo]
 
 Cria e consulta grupos de discussão
@@ -350,7 +350,7 @@ Cria e consulta grupos de discussão
 			  }		 
 			]
 
-
+<a id="lista"></a>
 # Lista [/api/lista-filme]
 
 Cria, atualiza e consulta uma lista
