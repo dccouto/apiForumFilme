@@ -66,9 +66,9 @@ Os filmes que podem ser consultados e adicionado nas listas.
 
 
 ### Buscar filme por título (Read) [GET /{titulo}]
-	```
-    http://localhost:8080/api/filme/cave
-    ```
+	
+    `http://localhost:8080/api/filme/cave`
+   
 + Parameters
 	+ titulo (required, titulo, `cave`) ... Título do filme
 		
