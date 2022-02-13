@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.challenge.TO.FilmeOmdbTO;
+import com.challenge.dto.FilmeOmdbTO;
 import com.challenge.entities.Filme;
 import com.challenge.entities.ListaFilme;
 import com.challenge.entities.Usuario;
@@ -203,9 +205,9 @@ public class ListaFilmeBusiness {
 
 
 
-	public List<ListaFilme> buscarTodasListaPublicas() throws Exception {
+	public Page<ListaFilme> buscarTodasListaPublicas(Pageable pageable) throws Exception {
 		try {
-			return listaFilmeRepository.findByStatus(StatusAcesso.PUBLICO);
+			return listaFilmeRepository.findByStatus(StatusAcesso.PUBLICO, pageable);
 		} catch (Exception e) {
 			throw new Exception("Falha ao buscar as listas");
 		}

@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.TO.FilmeOmdbTO;
 import com.challenge.business.FilmeBusiness;
+import com.challenge.dto.FilmeOmdbTO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/api/filme")
+@RequestMapping("/filme")
 @Api(value="API Filmes")
 @CrossOrigin(origins="*")
 public class FilmeController {

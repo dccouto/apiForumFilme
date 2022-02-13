@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 public class MovieApplication {
 
 	public static void main(String[] args) {
+		System.setProperty("server.servlet.context-path", "/movie/api");
 		SpringApplication.run(MovieApplication.class, args);
 	}
 

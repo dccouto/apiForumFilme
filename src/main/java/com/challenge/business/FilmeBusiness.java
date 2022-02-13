@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.challenge.TO.FilmeOmdbTO;
+import com.challenge.dto.FilmeOmdbTO;
 import com.challenge.entities.Filme;
 import com.challenge.repository.FilmeRepository;
 

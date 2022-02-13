@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.challenge.TO.FilmeOmdbTO;
+import com.challenge.dto.FilmeOmdbTO;
 import com.challenge.entities.Avaliacao;
 import com.challenge.entities.Filme;
 import com.challenge.entities.Usuario;

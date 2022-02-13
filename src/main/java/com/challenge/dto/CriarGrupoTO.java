@@ -1,4 +1,4 @@
-package com.challenge.TO;
+package com.challenge.dto;
 
 import java.util.ArrayList;
 import java.util.List;

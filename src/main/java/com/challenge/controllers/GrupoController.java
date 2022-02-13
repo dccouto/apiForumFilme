@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.TO.CriarGrupoTO;
 import com.challenge.business.GrupoBusiness;
+import com.challenge.dto.CriarGrupoTO;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/api/grupo")
+@RequestMapping("/grupo")
 @Api(value="API Avaliação")
 @CrossOrigin(origins="*")
 public class GrupoController {

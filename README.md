@@ -15,7 +15,7 @@ Recursos disponíveis para acesso via API:
 + A API utiliza banco de dados em memória, não sendo necessário a instalação do mesmo.
 + Ao iniciar a aplicação a API irá popular a base de dados com algumas entradas para teste. O arquivo está no diretório `src/main/resources/data.sql`
 + Usuario padrão pré cadastrado: username `diego@email.com` senha:`123456`
-+ Para acessar o Banco de dados utilize o link: http://localhost:8080/h2-console/login.jsp
++ Para acessar o Banco de dados utilize o link: http://localhost:8080/movie/api/h2-console/login.jsp
 + Dados para acesso `JDBC URL: jdbc:h2:mem:movie-challenge` `User Name: sa`
 
 
@@ -60,14 +60,14 @@ Para utilizar a API através, você precisará utilizar uma das seguintes opçõ
 # Group Recursos
 
 <a id="filme"></a>
-# Filme [/api/filme]
+# Filme [/movie/api/filme]
 
 Os filmes que podem ser consultados e adicionado nas listas.
 
 
 ### Buscar filme por título (Read) [GET /{titulo}]
 	
-`http://localhost:8080/api/filme/cave`
+`http://localhost:8080/movie/api/filme/cave`
    
 + Parameters
 	+ titulo (required, titulo, `cave`) ... Título do filme
@@ -91,14 +91,14 @@ Os filmes que podem ser consultados e adicionado nas listas.
 + Response 204 (application/json)
 
 <a id="usuario"></a>
-# Usuario [/api/usuario]
+# Usuario [/movie/api/usuario]
 
 Cadastra um novo usuário no sistema
 
 
 ### Criar usuário (Create) [POST /cadastrar]
 
-`http://localhost:8080/api/usuario/cadastrar`
+`http://localhost:8080/movie/api/usuario/cadastrar`
 
 + Attributes (object)
 
@@ -120,13 +120,13 @@ Cadastra um novo usuário no sistema
 + Response 200 (application/json)
 
 <a id="avaliacao"></a>
-# Avaliação [/api/filme/avaliar]
+# Avaliação [/movie/api/filme/avaliar]
 
 Cria, consulta e exclui uma avaliação um filme com `nota` e `estrela`
 
 ### Buscar avaliaçõs públicas por id do filme (Read) [GET /avaliacoes-por-filme/{idFilme}]
 
-`http://localhost:8080/api/filme/avaliar/avaliacoes-por-filme/1`
+`http://localhost:8080/movie/api/filme/avaliar/avaliacoes-por-filme/1`
 
 + Parameters
 	+ idFilme (required, idFilme, `1`) ... ID do filme
@@ -156,7 +156,7 @@ Cria, consulta e exclui uma avaliação um filme com `nota` e `estrela`
 
 ### Cria avaliação de um Filme (Read) [POST]
 
-`http://localhost:8080/api/filme/avaliar`
+`http://localhost:8080/movie/api/filme/avaliar`
 
 + Parameters
     + nota (required, number, `8`) ... Nota do filme
@@ -208,7 +208,7 @@ Cria, consulta e exclui uma avaliação um filme com `nota` e `estrela`
 		
 ### Exclui uma avaliação de nota e estrela do filme (Read) [DELETE /excluir/{idAvaliacao}]
 
-`http://localhost:8080/api/filme/avaliar/excluir/2`
+`http://localhost:8080/movie/api/filme/avaliar/excluir/2`
 		
 + Parameters
     + idAvaliacao (required, string, `2`) ... Id da avaliação
@@ -218,13 +218,13 @@ Cria, consulta e exclui uma avaliação um filme com `nota` e `estrela`
 
 
 <a id="grupo"></a>
-# Grupo [/api/grupo]
+# Grupo [/movie/api/grupo]
 
 Cria e consulta grupos de discussão
 
 ### Cria um grupo publico (Create) [POST /criar]
 
-`http://localhost:8080/api/grupo/criar`
+`http://localhost:8080/movie/api/grupo/criar`
 
 + Parameters
     + usuarioId (required, number, `1`) ... Id do usuário proprietário do grupo
@@ -261,7 +261,7 @@ Cria e consulta grupos de discussão
 
 ### Cria um grupo privado (Create) [POST /criar]
 
-`http://localhost:8080/api/grupo/criar`
+`http://localhost:8080/movie/api/grupo/criar`
 
 + Parameters
     + usuarioId (required, number, `1`) ... Id do usuário proprietário do grupo
@@ -315,7 +315,7 @@ Cria e consulta grupos de discussão
 
 ### Busca grupos publicos (Read) [GET /buscar-grupos-publicos]
 
-`http://localhost:8080/api/grupo/buscar-grupos-publicos`
+`http://localhost:8080/movie/api/grupo/buscar-grupos-publicos`
 
 + Response 200 (application/json)
     + Body
@@ -347,13 +347,13 @@ Cria e consulta grupos de discussão
 			]
 
 <a id="lista"></a>
-# Lista [/api/lista-filme]
+# Lista [/movie/api/lista-filme]
 
 Cria, atualiza e consulta uma lista
 
 ### Retorna todas as listas do usuário logado (Read) [GET /participante]
 
-`http://localhost:8080/api/lista-filme/participante`
+`http://localhost:8080/movie/api/lista-filme/participante`
 
 + Response 200 (application/json)
     + Body
@@ -404,7 +404,7 @@ Cria, atualiza e consulta uma lista
 
 ### Retorna todas as listas do Públicas (Read) [GET]
 
-`http://localhost:8080/api/lista-filme/`
+`http://localhost:8080/movie/api/lista-filme/`
 
 + Response 200 (application/json)
     + Body
@@ -454,7 +454,7 @@ Cria, atualiza e consulta uma lista
 
 ### Retorna os filmes da lista filtrados por 'ano' ou 'diretor' (Read) [GET /filtrar/{tipoFiltro}/{filtro}/{idLista}]
 
-`http://localhost:8080/api/lista-filme/filtrar/ano/2013/1`
+`http://localhost:8080/movie/api/lista-filme/filtrar/ano/2013/1`
 
 + Parameters
     + tipoFiltro (required, string, `ano`) ... Parâmetro para o filtro (ano ou diretor)
@@ -481,7 +481,7 @@ Cria, atualiza e consulta uma lista
 
 ### Criar nova lista para o usuário logado (Create) [POST /nova-lista]
 
-`http://localhost:8080/api/lista-filme/nova-lista`
+`http://localhost:8080/movie/api/lista-filme/nova-lista`
 
 + Parameters
     + nomeLista (required, string, `Assistindo`) ... Parâmetro para o filtro (ano ou diretor)
@@ -515,7 +515,7 @@ Cria, atualiza e consulta uma lista
 
 ### Adicionar filme na lista do usuário logado (Create) [POST /adicionar-filme/{idLista}]
 
-`http://localhost:8080/api/lista-filme/adicionar-filme/1`
+`http://localhost:8080/movie/api/lista-filme/adicionar-filme/1`
 
 + Parameters
     + idLista (required, number, `1`) ... ID la lista
@@ -553,7 +553,7 @@ Cria, atualiza e consulta uma lista
 
 ### Altera a visibilidade da lista do usuário logado (Update) [PUT /alterar-visibilidade/{idLista}]
 
-`http://localhost:8080/api/lista-filme/alterar-visibilidade/1`
+`http://localhost:8080/movie/api/lista-filme/alterar-visibilidade/1`
 
 + Parameters
     + idLista (required, number, `1`) ... ID la lista

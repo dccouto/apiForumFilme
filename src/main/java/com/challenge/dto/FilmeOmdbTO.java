@@ -1,4 +1,4 @@
-package com.challenge.TO;
+package com.challenge.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

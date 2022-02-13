@@ -3,6 +3,9 @@ package com.challenge.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,7 +26,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/api/lista-filme")
+@RequestMapping("/lista-filme")
 @Api(value="API Lista Filmes")
 @CrossOrigin(origins="*")
 public class ListaFilmeController {
@@ -50,9 +53,9 @@ public class ListaFilmeController {
 	
 	@GetMapping
 	@ApiOperation(value="Retorna todas as listas públicas")
-	public ResponseEntity<List<ListaFilme>> buscarTodasListasPublicas(){
+	public ResponseEntity<Page<ListaFilme>> buscarTodasListasPublicas(@PageableDefault(size = 2, page = 0) Pageable pageable){
 		try {
-			return ResponseEntity.ok(listaFilmeBusiness.buscarTodasListaPublicas());
+			return ResponseEntity.ok(listaFilmeBusiness.buscarTodasListaPublicas(pageable));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 		}

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.challenge.TO.CriarGrupoTO;
+import com.challenge.dto.CriarGrupoTO;
 import com.challenge.entities.Grupo;
 import com.challenge.entities.Usuario;
 import com.challenge.enums.StatusAcesso;

@@ -20,7 +20,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/api/filme/avaliar")
+@RequestMapping("/filme/avaliar")
 @Api(value="API Avaliação")
 @CrossOrigin(origins="*")
 public class AvaliacaoController {
