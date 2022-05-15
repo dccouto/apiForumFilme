@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.business.ListaFilmeBusiness;
+import com.challenge.business.interfaces.ListaFilmeBusinessInterface;
 import com.challenge.entities.Filme;
 import com.challenge.entities.ListaFilme;
 import com.challenge.security.UsuarioLogadoService;
@@ -33,10 +33,10 @@ public class ListaFilmeController {
 	
 	
 	@Autowired
-	ListaFilmeBusiness listaFilmeBusiness;
+	private ListaFilmeBusinessInterface listaFilmeBusiness;
 	
 	@Autowired
-	UsuarioLogadoService usuarioLogadoService;
+	private UsuarioLogadoService usuarioLogadoService;
 	
 	@GetMapping("/participante")
 	@ApiOperation(value="Retorna todas as listas do usuário logado")
