@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.challenge.business.interfaces.FilmeBusinessInterface;
 import com.challenge.business.interfaces.ListaFilmeBusinessInterface;
 import com.challenge.business.interfaces.UsuarioBusinessInterface;
 import com.challenge.dto.FilmeOmdbDto;
@@ -27,7 +28,7 @@ class ListaFilmeBusinessImpl implements ListaFilmeBusinessInterface {
 	private ListaFilmeRepository listaFilmeRepository;
 
 	@Autowired
-	private FilmeBusiness filmeBusiness;
+	private FilmeBusinessInterface filmeBusiness;
 
 	@Autowired
 	private UsuarioBusinessInterface usuarioBusiness;

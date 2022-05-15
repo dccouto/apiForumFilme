@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.business.FilmeBusiness;
+import com.challenge.business.interfaces.FilmeBusinessInterface;
 import com.challenge.dto.FilmeOmdbDto;
 
 import io.swagger.annotations.Api;
@@ -23,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
 public class FilmeController {
 	
 	@Autowired
-	FilmeBusiness filmeBusiness;
+	private FilmeBusinessInterface filmeBusiness;
 	
 	
 	@Cacheable(value="buscarFilme")

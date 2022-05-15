@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.challenge.business.interfaces.FilmeBusinessInterface;
+import com.challenge.business.interfaces.UsuarioBusinessInterface;
 import com.challenge.dto.FilmeOmdbDto;
 import com.challenge.entities.Avaliacao;
 import com.challenge.entities.Filme;
@@ -14,16 +16,16 @@ import com.challenge.enums.StatusAcesso;
 import com.challenge.repository.AvaliacaoRepository;
 
 @Service
-public class AvaliacaoBusiness {
+class AvaliacaoBusiness {
 
 	@Autowired
-	AvaliacaoRepository avaliacaoRepository;
+	private AvaliacaoRepository avaliacaoRepository;
 
 	@Autowired
-	UsuarioBusinessImpl usuarioBusiness;
+	private UsuarioBusinessInterface usuarioBusiness;
 
 	@Autowired
-	FilmeBusiness filmeBusiness;
+	private FilmeBusinessInterface filmeBusiness;
 
 	public Avaliacao avaliarFilme(Avaliacao avaliacao, String username) throws Exception {
 		try {
