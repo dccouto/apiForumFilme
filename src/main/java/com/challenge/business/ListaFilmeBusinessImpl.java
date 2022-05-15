@@ -19,7 +19,7 @@ import com.challenge.entities.Usuario;
 import com.challenge.enums.StatusAcesso;
 import com.challenge.exceptions.BusinessException;
 import com.challenge.exceptions.ListaFilmeException;
-import com.challenge.repository.ListaFilmeRepository;
+import com.challenge.repositories.ListaFilmeRepository;
 
 @Service
 class ListaFilmeBusinessImpl implements ListaFilmeBusinessInterface {

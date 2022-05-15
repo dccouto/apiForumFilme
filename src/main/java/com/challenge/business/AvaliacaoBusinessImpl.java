@@ -15,7 +15,7 @@ import com.challenge.entities.Filme;
 import com.challenge.entities.Usuario;
 import com.challenge.enums.StatusAcesso;
 import com.challenge.exceptions.AvalicacaoException;
-import com.challenge.repository.AvaliacaoRepository;
+import com.challenge.repositories.AvaliacaoRepository;
 
 @Service
 class AvaliacaoBusinessImpl implements AvaliacaoBusinessInterface {

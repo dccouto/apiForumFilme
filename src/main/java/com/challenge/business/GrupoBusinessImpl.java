@@ -14,7 +14,7 @@ import com.challenge.entities.Grupo;
 import com.challenge.entities.Usuario;
 import com.challenge.enums.StatusAcesso;
 import com.challenge.exceptions.GrupoException;
-import com.challenge.repository.GrupoRepository;
+import com.challenge.repositories.GrupoRepository;
 
 @Service
 class GrupoBusinessImpl implements GrupoBusinessInterface {

@@ -8,7 +8,7 @@ import com.challenge.business.interfaces.UsuarioBusinessInterface;
 import com.challenge.entities.Usuario;
 import com.challenge.exceptions.BusinessException;
 import com.challenge.exceptions.UserException;
-import com.challenge.repository.UsuarioRepository;
+import com.challenge.repositories.UsuarioRepository;
 
 @Service 
 class UsuarioBusinessImpl implements UsuarioBusinessInterface {

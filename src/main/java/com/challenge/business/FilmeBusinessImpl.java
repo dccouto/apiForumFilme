@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import com.challenge.business.interfaces.FilmeBusinessInterface;
 import com.challenge.dto.FilmeOmdbDto;
 import com.challenge.entities.Filme;
-import com.challenge.repository.FilmeRepository;
+import com.challenge.repositories.FilmeRepository;
 
 @Service
 class FilmeBusinessImpl implements FilmeBusinessInterface {

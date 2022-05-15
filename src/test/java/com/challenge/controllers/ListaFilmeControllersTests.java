@@ -16,7 +16,7 @@ import org.springframework.data.domain.PageImpl;
 import com.challenge.business.interfaces.ListaFilmeBusinessInterface;
 import com.challenge.entities.ListaFilme;
 import com.challenge.enums.StatusAcesso;
-import com.challenge.repository.ListaFilmeRepository;
+import com.challenge.repositories.ListaFilmeRepository;
 
 @SpringBootTest
 class ListaFilmeControllersTests {

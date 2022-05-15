@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import com.challenge.entities.Usuario;
-import com.challenge.repository.UsuarioRepository;
+import com.challenge.repositories.UsuarioRepository;
 
 @Repository
 @Transactional

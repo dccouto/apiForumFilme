@@ -1,4 +1,4 @@
-package com.challenge.repository;
+package com.challenge.repositories;
 
 import java.util.List;
 
