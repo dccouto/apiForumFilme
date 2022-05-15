@@ -18,29 +18,23 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/filme")
-@Api(value="API Filmes")
-@CrossOrigin(origins="*")
+@Api(value = "API Filmes")
+@CrossOrigin(origins = "*")
 public class FilmeController {
-	
+
 	@Autowired
 	private FilmeBusinessInterface filmeBusiness;
-	
-	
-	@Cacheable(value="buscarFilme")
-	@GetMapping("/{titulo}")
-	@ApiOperation(value="Busca um filme pelo título")
-	public ResponseEntity<FilmeOmdbDto> buscarFilmePorTitulo(@PathVariable String titulo){
-		try {			
-			FilmeOmdbDto buscarFilmePorTitulo = filmeBusiness.buscarFilmePorTitulo(titulo);
-			if(buscarFilmePorTitulo.getImdbID() == null) {
-				return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-			}
-			return ResponseEntity.ok(filmeBusiness.buscarFilmePorTitulo(titulo));		
 
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+	@Cacheable(value = "buscarFilme")
+	@GetMapping("/{titulo}")
+	@ApiOperation(value = "Busca um filme pelo título")
+	public ResponseEntity<FilmeOmdbDto> buscarFilmePorTitulo(@PathVariable String titulo) {
+
+		FilmeOmdbDto buscarFilmePorTitulo = filmeBusiness.buscarFilmePorTitulo(titulo);
+		if (buscarFilmePorTitulo.getImdbID() == null) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 		}
-		
+		return ResponseEntity.ok(filmeBusiness.buscarFilmePorTitulo(titulo));
 	}
 
 }

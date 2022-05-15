@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,91 +26,64 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/lista-filme")
-@Api(value="API Lista Filmes")
-@CrossOrigin(origins="*")
+@Api(value = "API Lista Filmes")
+@CrossOrigin(origins = "*")
 public class ListaFilmeController {
-	
-	
+
 	@Autowired
 	private ListaFilmeBusinessInterface listaFilmeBusiness;
-	
+
 	@Autowired
 	private UsuarioLogadoService usuarioLogadoService;
-	
+
 	@GetMapping("/participante")
-	@ApiOperation(value="Retorna todas as listas do usuário logado")
-	public ResponseEntity<List<ListaFilme>> buscarTodasListasDoUsuarioLogado(){
-		try {
-			
-			String username = usuarioLogadoService.getUsername();
+	@ApiOperation(value = "Retorna todas as listas do usuário logado")
+	public ResponseEntity<List<ListaFilme>> buscarTodasListasDoUsuarioLogado() {
 
-			return ResponseEntity.ok(listaFilmeBusiness.buscarListasDoParticipante(username));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
+		String username = usuarioLogadoService.getUsername();
+
+		return ResponseEntity.ok(listaFilmeBusiness.buscarListasDoParticipante(username));
 	}
-	
+
 	@GetMapping
-	@ApiOperation(value="Retorna todas as listas públicas")
-	public ResponseEntity<Page<ListaFilme>> buscarTodasListasPublicas(@PageableDefault(size = 2, page = 0) Pageable pageable){
-		try {
-			return ResponseEntity.ok(listaFilmeBusiness.buscarTodasListaPublicas(pageable));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-		}
-	}
-	
-	@GetMapping("/filtrar/{tipoFiltro}/{filtro}/{idLista}")
-	@ApiOperation(value="Retorna os filmes da lista filtrados por 'ano' ou 'diretor'")
-	public ResponseEntity<Object> buscarFilmeListaPorFiltro(@PathVariable String filtro, @PathVariable String tipoFiltro, @PathVariable Long idLista){
-		try {
-			
-			String username = usuarioLogadoService.getUsername();
-			
-			return ResponseEntity.ok(listaFilmeBusiness.buscarFilmeListaPorFiltro(filtro, tipoFiltro, idLista, username));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-	}
-	
-	/**
-	 * Cria nova lista de filme
-	 * @param lista
-	 * 
-	 * */
-	@PostMapping("/nova-lista")
-	@ApiOperation(value="Cria uma nova lista de filmes")
-	public ResponseEntity<Object> criarNovaLista(@RequestBody ListaFilme lista){
-		try {
-			String username = usuarioLogadoService.getUsername();
-			return ResponseEntity.ok(listaFilmeBusiness.criarListaFilme(lista, username));		
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-	}
-	
-	@PutMapping("alterar-visibilidade/{idLista}")
-	@ApiOperation(value="Altera a visibilidade da lista")
-	public ResponseEntity<ListaFilme> alterarStatusLista(@RequestBody ListaFilme status, @PathVariable Long idLista) {
-		try {
-			String username = usuarioLogadoService.getUsername();
-			return ResponseEntity.ok(listaFilmeBusiness.alterarStatusLista(status.getStatus(), idLista, username));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
-	}
-	
-	@PostMapping("/adicionar-filme/{idLista}")
-	@ApiOperation(value="Adiciona um filme na lista do usuário")
-	public ResponseEntity<Object> adicionarFilmeNaLista(@PathVariable Long idLista, @RequestBody Filme filme){
-		try {
-			String username = usuarioLogadoService.getUsername();
-			return ResponseEntity.ok(listaFilmeBusiness.adicionarFilmeNaLista(idLista, filme, username));		
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-	}
-	
-	
+	@ApiOperation(value = "Retorna todas as listas públicas")
+	public ResponseEntity<Page<ListaFilme>> buscarTodasListasPublicas(
+			@PageableDefault(size = 2, page = 0) Pageable pageable) {
 
+		return ResponseEntity.ok(listaFilmeBusiness.buscarTodasListaPublicas(pageable));
+	}
+
+	@GetMapping("/filtrar/{tipoFiltro}/{filtro}/{idLista}")
+	@ApiOperation(value = "Retorna os filmes da lista filtrados por 'ano' ou 'diretor'")
+	public ResponseEntity<Object> buscarFilmeListaPorFiltro(@PathVariable String filtro,
+			@PathVariable String tipoFiltro, @PathVariable Long idLista) {
+
+		String username = usuarioLogadoService.getUsername();
+
+		return ResponseEntity.ok(listaFilmeBusiness.buscarFilmeListaPorFiltro(filtro, tipoFiltro, idLista, username));
+	}
+
+	@PostMapping("/nova-lista")
+	@ApiOperation(value = "Cria uma nova lista de filmes")
+	public ResponseEntity<Object> criarNovaLista(@RequestBody ListaFilme lista) {
+
+		String username = usuarioLogadoService.getUsername();
+		return ResponseEntity.ok(listaFilmeBusiness.criarListaFilme(lista, username));
+	}
+
+	@PutMapping("alterar-visibilidade/{idLista}")
+	@ApiOperation(value = "Altera a visibilidade da lista")
+	public ResponseEntity<ListaFilme> alterarStatusLista(@RequestBody ListaFilme status, @PathVariable Long idLista) {
+
+		String username = usuarioLogadoService.getUsername();
+		return ResponseEntity.ok(listaFilmeBusiness.alterarStatusLista(status.getStatus(), idLista, username));
+	}
+
+	@PostMapping("/adicionar-filme/{idLista}")
+	@ApiOperation(value = "Adiciona um filme na lista do usuário")
+	public ResponseEntity<Object> adicionarFilmeNaLista(@PathVariable Long idLista, @RequestBody Filme filme) {
+
+		String username = usuarioLogadoService.getUsername();
+		return ResponseEntity.ok(listaFilmeBusiness.adicionarFilmeNaLista(idLista, filme, username));
+	}
 }

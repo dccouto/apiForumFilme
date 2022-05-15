@@ -1,7 +1,6 @@
 package com.challenge.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,33 +17,25 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/grupo")
-@Api(value="API Avaliação")
-@CrossOrigin(origins="*")
+@Api(value = "API Avaliação")
+@CrossOrigin(origins = "*")
 public class GrupoController {
-	
+
 	@Autowired
 	private GrupoBusinessInterface grupoBusiness;
 
-
 	@PostMapping("/criar")
-	@ApiOperation(value="Cria um grupo de discussão")
+	@ApiOperation(value = "Cria um grupo de discussão")
 	public ResponseEntity<Object> criarGrupoDebate(@RequestBody CriarGrupoDto grupo) {
-		try {
-			return ResponseEntity.ok(grupoBusiness.criarGrupo(grupo));
-			
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
+
+		return ResponseEntity.ok(grupoBusiness.criarGrupo(grupo));
+
 	}
-	
-	
+
 	@GetMapping("/buscar-grupos-publicos")
-	@ApiOperation(value="Busca todos grupos de discussão públicos")
+	@ApiOperation(value = "Busca todos grupos de discussão públicos")
 	public ResponseEntity<Object> buscarGruposDebatePublicos() {
-		try {
-			return ResponseEntity.ok(grupoBusiness.buscarGruposDebatePublicos());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
+
+		return ResponseEntity.ok(grupoBusiness.buscarGruposDebatePublicos());
 	}
 }

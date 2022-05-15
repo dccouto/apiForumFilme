@@ -17,24 +17,18 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/usuario")
-@Api(value="API Usuario")
-@CrossOrigin(origins="*")
+@Api(value = "API Usuario")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
-	
+
 	@Autowired
 	private UsuarioBusinessInterface usuarioBusiness;
 
-
 	@PostMapping("/cadastrar")
-	@ApiOperation(value="Cadastra um novo usuário no sistema")
-	public ResponseEntity<String> criarUsuario(@RequestBody Usuario usuario) {
-		try {
-			usuarioBusiness.cadastrarUsuario(usuario);
-			return ResponseEntity.status(HttpStatus.CREATED).body("Cadastrado com Sucesso!");
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
-		
-		
+	@ApiOperation(value = "Cadastra um novo usuário no sistema")
+	public ResponseEntity<Object> criarUsuario(@RequestBody Usuario usuario) {
+
+		usuarioBusiness.cadastrarUsuario(usuario);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Cadastrado com Sucesso!");
 	}
 }

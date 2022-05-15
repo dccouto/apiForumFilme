@@ -21,47 +21,36 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/filme/avaliar")
-@Api(value="API Avaliação")
-@CrossOrigin(origins="*")
+@Api(value = "API Avaliação")
+@CrossOrigin(origins = "*")
 public class AvaliacaoController {
-	
+
 	@Autowired
 	private AvaliacaoBusinessInterface avaliacaoBusiness;
-	
+
 	@Autowired
 	UsuarioLogadoService usuarioLogadoService;
-	
+
 	@GetMapping("/avaliacoes-por-filme/{idFilme}")
-	@ApiOperation(value="Busca todas avaliações publicas por filme")
-	public ResponseEntity<Object> buscaAvaliacaoPublicasPorFilme(@PathVariable Long idFilme){
-		try {
-			return ResponseEntity.ok(avaliacaoBusiness.buscaAvaliacaoPublicasPorFilme(idFilme));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
+	@ApiOperation(value = "Busca todas avaliações publicas por filme")
+	public ResponseEntity<Object> buscaAvaliacaoPublicasPorFilme(@PathVariable Long idFilme) {
+
+		return ResponseEntity.ok(avaliacaoBusiness.buscaAvaliacaoPublicasPorFilme(idFilme));
 	}
 
 	@PostMapping
-	@ApiOperation(value="Avalia um filme através de nota e estrela")
-	public ResponseEntity<Object> avaliarFilme(@RequestBody Avaliacao avaliacao){
-		try {
-			
-			String username = usuarioLogadoService.getUsername();
-			return ResponseEntity.ok(avaliacaoBusiness.avaliarFilme(avaliacao, username));
-			
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
+	@ApiOperation(value = "Avalia um filme através de nota e estrela")
+	public ResponseEntity<Object> avaliarFilme(@RequestBody Avaliacao avaliacao) {
+
+		String username = usuarioLogadoService.getUsername();
+		return ResponseEntity.ok(avaliacaoBusiness.avaliarFilme(avaliacao, username));
 	}
-	
+
 	@DeleteMapping("/excluir/{idAvaliacao}")
-	@ApiOperation(value="Exclui uma avaliação de nota e estrela")
+	@ApiOperation(value = "Exclui uma avaliação de nota e estrela")
 	public ResponseEntity<String> excluirAvaliacao(@PathVariable Long idAvaliacao) {
-		try {
-			avaliacaoBusiness.excluirAvaliacao(idAvaliacao);
-			return ResponseEntity.status(HttpStatus.OK).body("Excluído com sucesso");
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-		}
+
+		avaliacaoBusiness.excluirAvaliacao(idAvaliacao);
+		return ResponseEntity.status(HttpStatus.OK).body("Excluído com sucesso");
 	}
 }
