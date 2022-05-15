@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.business.UsuarioBusiness;
+import com.challenge.business.interfaces.UsuarioBusinessInterface;
 import com.challenge.entities.Usuario;
 
 import io.swagger.annotations.Api;
@@ -22,7 +22,8 @@ import io.swagger.annotations.ApiOperation;
 public class UsuarioController {
 	
 	@Autowired
-	UsuarioBusiness usuarioBusiness;
+	private UsuarioBusinessInterface usuarioBusiness;
+
 
 	@PostMapping("/cadastrar")
 	@ApiOperation(value="Cadastra um novo usuário no sistema")
