@@ -73,7 +73,7 @@ class ListaFilmeBusinessImpl implements ListaFilmeBusinessInterface {
 		FilmeOmdbDto filmeApiExternaPorImdb = filmeBusiness.buscarFilmeApiExternaPorImdb(filme.getImdbID());
 		filme = new Filme(filmeApiExternaPorImdb);
 
-		ListaFilme listaFilmes = listaFilmeRepository.findById(idLista).orElseThrow();
+		ListaFilme listaFilmes = listaFilmeRepository.findById(idLista).orElseThrow(() -> new ListaFilmeException("Lista não encontrada."));
 
 		listaFilmes.getListaFilmes().add(filme);
 		listaFilmes.setUsuario(buscaUsuarioPorEmail(username));

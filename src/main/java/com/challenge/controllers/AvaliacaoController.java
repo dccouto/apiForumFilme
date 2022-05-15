@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.business.AvaliacaoBusiness;
+import com.challenge.business.interfaces.AvaliacaoBusinessInterface;
 import com.challenge.entities.Avaliacao;
 import com.challenge.security.UsuarioLogadoService;
 
@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiOperation;
 public class AvaliacaoController {
 	
 	@Autowired
-	AvaliacaoBusiness avaliacaoBusiness;
+	private AvaliacaoBusinessInterface avaliacaoBusiness;
 	
 	@Autowired
 	UsuarioLogadoService usuarioLogadoService;
