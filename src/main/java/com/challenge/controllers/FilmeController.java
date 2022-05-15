@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.business.FilmeBusiness;
-import com.challenge.dto.FilmeOmdbTO;
+import com.challenge.dto.FilmeOmdbDto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,9 +29,9 @@ public class FilmeController {
 	@Cacheable(value="buscarFilme")
 	@GetMapping("/{titulo}")
 	@ApiOperation(value="Busca um filme pelo título")
-	public ResponseEntity<FilmeOmdbTO> buscarFilmePorTitulo(@PathVariable String titulo){
+	public ResponseEntity<FilmeOmdbDto> buscarFilmePorTitulo(@PathVariable String titulo){
 		try {			
-			FilmeOmdbTO buscarFilmePorTitulo = filmeBusiness.buscarFilmePorTitulo(titulo);
+			FilmeOmdbDto buscarFilmePorTitulo = filmeBusiness.buscarFilmePorTitulo(titulo);
 			if(buscarFilmePorTitulo.getImdbID() == null) {
 				return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
 			}

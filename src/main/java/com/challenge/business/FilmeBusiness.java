@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.challenge.dto.FilmeOmdbTO;
+import com.challenge.dto.FilmeOmdbDto;
 import com.challenge.entities.Filme;
 import com.challenge.repository.FilmeRepository;
 
@@ -27,21 +27,21 @@ public class FilmeBusiness {
 	@Autowired
 	FilmeRepository filmeRepository;
 	
-	public FilmeOmdbTO buscarFilmePorTitulo(String titulo) {
+	public FilmeOmdbDto buscarFilmePorTitulo(String titulo) {
 		
 		return buscarFilmeApiExternaPorTitulo(titulo);
 	}
 	
-	private FilmeOmdbTO buscarFilmeApiExternaPorTitulo(String titulo){
+	private FilmeOmdbDto buscarFilmeApiExternaPorTitulo(String titulo){
 		RestTemplate restTemplate = new RestTemplate();
-		FilmeOmdbTO filmeTO = restTemplate.getForObject(API_TITULO + titulo + API_KEY, FilmeOmdbTO.class);
+		FilmeOmdbDto filmeTO = restTemplate.getForObject(API_TITULO + titulo + API_KEY, FilmeOmdbDto.class);
 		return filmeTO;
 		
 	}
 	
-	public FilmeOmdbTO buscarFilmeApiExternaPorImdb(String imdb){
+	public FilmeOmdbDto buscarFilmeApiExternaPorImdb(String imdb){
 		RestTemplate restTemplate = new RestTemplate();
-		FilmeOmdbTO filmeTO = restTemplate.getForObject(API_IMDB + imdb + API_KEY, FilmeOmdbTO.class);
+		FilmeOmdbDto filmeTO = restTemplate.getForObject(API_IMDB + imdb + API_KEY, FilmeOmdbDto.class);
 		return filmeTO;
 		
 	}
@@ -50,7 +50,7 @@ public class FilmeBusiness {
 		return filmeRepository.existsByImdbID(imdbID);
 	}
 
-	public Filme salvar(FilmeOmdbTO filmeApiExternaPorImdb) {
+	public Filme salvar(FilmeOmdbDto filmeApiExternaPorImdb) {
 		return filmeRepository.save(new Filme(filmeApiExternaPorImdb));
 		
 	}

@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.challenge.dto.FilmeOmdbTO;
+import com.challenge.dto.FilmeOmdbDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -40,7 +40,7 @@ public class Filme {
 	
 	public Filme() {};
 	
-	public Filme(FilmeOmdbTO filmeOmdbTO) {
+	public Filme(FilmeOmdbDto filmeOmdbTO) {
 		this.setTitulo(filmeOmdbTO.getTitulo());
 		this.setImdbID(filmeOmdbTO.getImdbID());
 	}

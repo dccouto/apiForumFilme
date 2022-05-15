@@ -5,8 +5,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
-import com.challenge.business.ListaFilmeBusiness;
+import com.challenge.business.interfaces.ListaFilmeBusinessInterface;
 import com.challenge.entities.ListaFilme;
 import com.challenge.enums.StatusAcesso;
 import com.challenge.repository.ListaFilmeRepository;
@@ -24,7 +22,7 @@ import com.challenge.repository.ListaFilmeRepository;
 class ListaFilmeControllersTests {
 
 	@Autowired
-	ListaFilmeBusiness listaFilmeBusiness;
+	ListaFilmeBusinessInterface listaFilmeBusiness;
 	
 	@MockBean
 	ListaFilmeRepository listaFilmeRepository;

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.challenge.enums.StatusAcesso;
 
-public class CriarGrupoTO {
+public class CriarGrupoDto {
 
 	private Long usuarioId; 
 	private StatusAcesso status; 

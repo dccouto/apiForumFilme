@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.challenge.dto.FilmeOmdbTO;
+import com.challenge.dto.FilmeOmdbDto;
 import com.challenge.entities.Avaliacao;
 import com.challenge.entities.Filme;
 import com.challenge.entities.Usuario;
@@ -20,7 +20,7 @@ public class AvaliacaoBusiness {
 	AvaliacaoRepository avaliacaoRepository;
 
 	@Autowired
-	UsuarioBusiness usuarioBusiness;
+	UsuarioBusinessImpl usuarioBusiness;
 
 	@Autowired
 	FilmeBusiness filmeBusiness;
@@ -37,7 +37,7 @@ public class AvaliacaoBusiness {
 			Filme filme = new Filme();
 			if (!filmeBusiness.verificarSeFilmeEstaSalvoNoBancoDados(imdbID)) {
 
-				FilmeOmdbTO FilmeApiExterna = filmeBusiness.buscarFilmeApiExternaPorImdb(imdbID);
+				FilmeOmdbDto FilmeApiExterna = filmeBusiness.buscarFilmeApiExternaPorImdb(imdbID);
 				filme = filmeBusiness.salvar(FilmeApiExterna);
 			} else {
 				filme = filmeBusiness.buscarFilmeBaseLocalPorImdbID(imdbID);

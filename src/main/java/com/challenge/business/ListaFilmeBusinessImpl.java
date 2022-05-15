@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.challenge.business.interfaces.ListaFilmeBusinessInterface;
 import com.challenge.business.interfaces.UsuarioBusinessInterface;
-import com.challenge.dto.FilmeOmdbTO;
+import com.challenge.dto.FilmeOmdbDto;
 import com.challenge.entities.Filme;
 import com.challenge.entities.ListaFilme;
 import com.challenge.entities.Usuario;
@@ -69,7 +69,7 @@ class ListaFilmeBusinessImpl implements ListaFilmeBusinessInterface {
 			throw new ListaFilmeException("Filme já existe na lista");
 		}
 
-		FilmeOmdbTO filmeApiExternaPorImdb = filmeBusiness.buscarFilmeApiExternaPorImdb(filme.getImdbID());
+		FilmeOmdbDto filmeApiExternaPorImdb = filmeBusiness.buscarFilmeApiExternaPorImdb(filme.getImdbID());
 		filme = new Filme(filmeApiExternaPorImdb);
 
 		ListaFilme listaFilmes = listaFilmeRepository.findById(idLista).orElseThrow();
@@ -109,12 +109,12 @@ class ListaFilmeBusinessImpl implements ListaFilmeBusinessInterface {
 	}
 
 	@Override
-	public List<FilmeOmdbTO> buscarFilmeListaPorFiltro(String filtro, String tipoFiltro, Long idLista,
+	public List<FilmeOmdbDto> buscarFilmeListaPorFiltro(String filtro, String tipoFiltro, Long idLista,
 			String username) {
 		verificaSeListaPertenceUsuario(idLista, username);
 
 		List<Filme> filmesPorLista = filmeBusiness.getFilmesPorLista(idLista);
-		List<FilmeOmdbTO> filmeOmdbTOs = new ArrayList<>();
+		List<FilmeOmdbDto> filmeOmdbTOs = new ArrayList<>();
 
 		for (Filme filme : filmesPorLista) {
 			filmeOmdbTOs.add(filmeBusiness.buscarFilmeApiExternaPorImdb(filme.getImdbID()));
@@ -139,11 +139,11 @@ class ListaFilmeBusinessImpl implements ListaFilmeBusinessInterface {
 		return listaFilmeRepository.existsByUsuario_emailAndIdLista(username, idLista);
 	}
 
-	private static List<FilmeOmdbTO> filtraFilmes(List<FilmeOmdbTO> filmes, String filtro, String tipoFiltro) {
-		List<FilmeOmdbTO> filmesOmdbFiltrados = new ArrayList<>();
+	private static List<FilmeOmdbDto> filtraFilmes(List<FilmeOmdbDto> filmes, String filtro, String tipoFiltro) {
+		List<FilmeOmdbDto> filmesOmdbFiltrados = new ArrayList<>();
 		switch (tipoFiltro.toUpperCase()) {
 		case "DIRETOR":
-			for (FilmeOmdbTO filme : filmes) {
+			for (FilmeOmdbDto filme : filmes) {
 				if (filme.getDiretor().compareToIgnoreCase(filtro) == BigDecimal.ZERO.intValue()) {
 					filmesOmdbFiltrados.add(filme);
 				}
@@ -151,15 +151,12 @@ class ListaFilmeBusinessImpl implements ListaFilmeBusinessInterface {
 
 			break;
 		case "ANO":
-			for (FilmeOmdbTO filme : filmes) {
+			for (FilmeOmdbDto filme : filmes) {
 				if (filme.getAno().compareToIgnoreCase(filtro) == 0) {
 					filmesOmdbFiltrados.add(filme);
-
 				}
 			}
-
 			break;
-
 		default:
 			throw new BusinessException("Filtro inválido");
 		}

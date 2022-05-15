@@ -2,7 +2,7 @@ package com.challenge.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class FilmeOmdbTO {
+public class FilmeOmdbDto {
 	
 	@JsonProperty("Title")
 	private String titulo;
@@ -28,7 +28,7 @@ public class FilmeOmdbTO {
 	
 	
 	
-	public FilmeOmdbTO() {};
+	public FilmeOmdbDto() {};
 	
 	
 	public String getTitulo() {

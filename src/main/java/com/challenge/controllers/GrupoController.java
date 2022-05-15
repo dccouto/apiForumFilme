@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.challenge.business.GrupoBusiness;
-import com.challenge.dto.CriarGrupoTO;
+import com.challenge.business.interfaces.GrupoBusinessInterface;
+import com.challenge.dto.CriarGrupoDto;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,14 +23,12 @@ import io.swagger.annotations.ApiOperation;
 public class GrupoController {
 	
 	@Autowired
-	GrupoBusiness grupoBusiness;
+	private GrupoBusinessInterface grupoBusiness;
 
-	/**
-	 * @param grupo
-	 * */
+
 	@PostMapping("/criar")
 	@ApiOperation(value="Cria um grupo de discussão")
-	public ResponseEntity<Object> criarGrupoDebate(@RequestBody CriarGrupoTO grupo) {
+	public ResponseEntity<Object> criarGrupoDebate(@RequestBody CriarGrupoDto grupo) {
 		try {
 			return ResponseEntity.ok(grupoBusiness.criarGrupo(grupo));
 			
