@@ -1,5 +1,7 @@
 package com.challenge.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.business.interfaces.AvaliacaoBusinessInterface;
-import com.challenge.entities.Avaliacao;
+import com.challenge.dto.AvaliacaoDto;
 import com.challenge.security.UsuarioLogadoService;
 
 import io.swagger.annotations.Api;
@@ -40,10 +42,10 @@ public class AvaliacaoController {
 
 	@PostMapping
 	@ApiOperation(value = "Avalia um filme através de nota e estrela")
-	public ResponseEntity<Object> avaliarFilme(@RequestBody Avaliacao avaliacao) {
+	public ResponseEntity<Object> avaliarFilme(@Valid @RequestBody AvaliacaoDto avaliacaoDto) {
 
 		String username = usuarioLogadoService.getUsername();
-		return ResponseEntity.ok(avaliacaoBusiness.avaliarFilme(avaliacao, username));
+		return ResponseEntity.ok(avaliacaoBusiness.avaliarFilme(avaliacaoDto, username));
 	}
 
 	@DeleteMapping("/excluir/{idAvaliacao}")

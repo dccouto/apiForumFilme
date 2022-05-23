@@ -3,12 +3,15 @@ package com.challenge.business;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.challenge.business.interfaces.AvaliacaoBusinessInterface;
 import com.challenge.business.interfaces.FilmeBusinessInterface;
 import com.challenge.business.interfaces.UsuarioBusinessInterface;
+import com.challenge.dto.AvaliacaoDto;
 import com.challenge.dto.FilmeOmdbDto;
 import com.challenge.entities.Avaliacao;
 import com.challenge.entities.Filme;
@@ -30,15 +33,17 @@ class AvaliacaoBusinessImpl implements AvaliacaoBusinessInterface {
 	private FilmeBusinessInterface filmeBusiness;
 
 	@Override
-	public Avaliacao avaliarFilme(Avaliacao avaliacao, String username) {
-		validarCamposObrigatorios(avaliacao, username);
+	public Avaliacao avaliarFilme(@Valid AvaliacaoDto avaliacaoDto, @Valid String username) {
 
-		String imdbID = avaliacao.getFilme().getImdbID();
-
-		Usuario usuario = usuarioBusiness.getUsuarioByEmail(username);
+		var usuario = buscaUsuarioPorEmail(username);
+		
+		Avaliacao avaliacao = new Avaliacao().toEntity(avaliacaoDto);
+		
 		avaliacao.setUsuario(usuario);
 
 		Filme filme = new Filme();
+		
+		String imdbID = avaliacaoDto.getImdbID();
 		if (!filmeBusiness.verificarSeFilmeEstaSalvoNoBancoDados(imdbID)) {
 
 			FilmeOmdbDto FilmeApiExterna = filmeBusiness.buscarFilmeApiExternaPorImdb(imdbID);
@@ -57,28 +62,8 @@ class AvaliacaoBusinessImpl implements AvaliacaoBusinessInterface {
 		return avaliacaoRepository.save(avaliacao);
 	}
 
-	private static void validarCamposObrigatorios(Avaliacao avaliacao, String username) {
-		if (avaliacao.getStatus() == null) {
-			throw new AvalicacaoException("É necessário informar se é PUBLICO ou PRIVADO");
-		}
-		if (avaliacao.getEstrela() == null) {
-			throw new AvalicacaoException("As estretas são obrigatórias");
-		}
-		if (avaliacao.getEstrela() < 1 || avaliacao.getEstrela() > 5) {
-			throw new AvalicacaoException("As estretas permitidas são de 1 à 5");
-		}
-		if (avaliacao.getNota() == null) {
-			throw new AvalicacaoException("A nota é obrigatória");
-		}
-		if (avaliacao.getNota() < 5 || avaliacao.getNota() > 10) {
-			throw new AvalicacaoException("As notas deverão estar no intervalo entre 5 à 10");
-		}
-		if (username == null) {
-			throw new AvalicacaoException("É necessário estar logado");
-		}
-		if (avaliacao.getFilme().getImdbID() == null) {
-			throw new AvalicacaoException("É informar o imdbId do filme");
-		}
+	private Usuario buscaUsuarioPorEmail(String username) {
+		return usuarioBusiness.getUsuarioByEmail(username);
 	}
 
 	private Avaliacao buscarAvaliacaoDoFilme(Filme filme, Usuario usuario) {

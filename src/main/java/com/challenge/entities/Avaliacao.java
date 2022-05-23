@@ -10,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
+import com.challenge.dto.AvaliacaoDto;
 import com.challenge.enums.StatusAcesso;
 
 import springfox.documentation.annotations.ApiIgnore;
@@ -89,6 +91,13 @@ public class Avaliacao {
 
 	public void setStatus(StatusAcesso status) {
 		this.status = status;
+	}
+
+	public Avaliacao toEntity(@Valid AvaliacaoDto avaliacaoDto) {
+		this.setEstrela(avaliacaoDto.getEstrela());
+		this.setNota(avaliacaoDto.getNota());
+		this.setStatus(avaliacaoDto.getStatus());
+		return this;
 	}
 	
 	
