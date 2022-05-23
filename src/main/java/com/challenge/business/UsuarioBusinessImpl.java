@@ -1,12 +1,14 @@
 package com.challenge.business;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.challenge.business.interfaces.UsuarioBusinessInterface;
+import com.challenge.dto.UsuarioDto;
 import com.challenge.entities.Usuario;
-import com.challenge.exceptions.BusinessException;
 import com.challenge.exceptions.UserException;
 import com.challenge.repositories.UsuarioRepository;
 
@@ -17,32 +19,20 @@ class UsuarioBusinessImpl implements UsuarioBusinessInterface {
 	private UsuarioRepository usuarioRepository;
 
 	@Override
-	public void cadastrarUsuario(Usuario usuario) {
+	public void cadastrarUsuario(@Valid UsuarioDto usuarioDto) {
 
-		validaCamposObrigatoriosUsuario(usuario);
 
-		validaSeUsuarioExiste(usuario);
+		validaSeUsuarioExiste(usuarioDto);
 
-		usuario.setSenha(encriptaSenha(usuario.getPassword()));
+		usuarioDto.setSenha(encriptaSenha(usuarioDto.getSenha()));
+		
+		Usuario usuario = new Usuario(usuarioDto);
 		usuarioRepository.save(usuario);
 
 	}
 
-	private static void validaCamposObrigatoriosUsuario(Usuario usuario) {
-		if (usuario.getNome() == null) {
-			throw new BusinessException("O campo nome é obrigatório");
-		}
-		if (usuario.getEmail() == null) {
-			throw new BusinessException("O campo e-mail é obrigatório");
-		}
-		if (usuario.getPassword() == null) {
-			throw new BusinessException("O campo senha é obrigatório");
-		}
-
-	}
-
-	private void validaSeUsuarioExiste(Usuario usuario) {
-		if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+	private void validaSeUsuarioExiste(UsuarioDto usuarioDto) {
+		if (usuarioRepository.existsByEmail(usuarioDto.getEmail())) {
 			throw new UserException("Usuario já existe");
 		}
 	}

@@ -10,10 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.challenge.dto.UsuarioDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
@@ -54,6 +56,13 @@ public class Usuario implements UserDetails{
 		this.senha = senha;
 		this.grupos = grupos;
 	}
+
+	public Usuario(@Valid UsuarioDto usuarioDto) {
+		this.nome = usuarioDto.getNome();
+		this.email = usuarioDto.getEmail();
+		this.senha = usuarioDto.getSenha();
+	}
+
 
 	public Long getIdUsuario() {
 		return idUsuario;
